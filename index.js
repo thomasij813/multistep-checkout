@@ -1,5 +1,20 @@
 const express = require('express');
 const Sequelize = require('sequelize');
+const dbConfig = require('./db.config');
+
+const sequelize = new Sequelize('checkout', dbConfig.username, dbConfig.password, {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+});
 
 const app = express();
 
